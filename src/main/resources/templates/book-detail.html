@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Book</title>
+<style>
+	html {
+		margin: 0;
+		padding: 0;
+		height: 100%;
+		width: 100%;
+	}
+	body {
+		margin: 0;
+		height: 100%;
+		
+		flex-direction: column;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		
+	}
+
+	.mt-12 {
+		margin-top: 12px;
+	}
+
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items:center;
+		justify-content: center;
+		height: 100%;
+		width: 100%;
+	}
+
+	.title {
+		margin-bottom: 30px;
+		font-size: 40px;
+		font-weight: 500;
+	}
+
+	.form {
+		display: flex;
+		justify-content: space-around;
+		width: 100%;
+		
+	}	
+
+	.form-1 {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+	}
+
+	.form-info {
+		width: 350px;
+	} 
+
+	.form-info-1,
+	.form-info-4,
+	.form-info-2 {
+		display: flex;
+		justify-content: space-between;
+
+	}
+
+	.form-input {
+		min-width: 150px;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		padding: 6px 8px;
+		outline: none;
+	}
+
+	.form-input:focus {
+		border: 1px solid #289dea;
+		box-shadow:0 0 3px #289dea;
+	}
+
+	.form-submit {
+		font-size: 16px;
+		float: right;
+		min-width: 90px;
+		padding: 10px 20px;
+		margin-right: 16px;
+		border: none;
+		background-color: #02bd50;
+		color: #fff;
+		border-radius: 3px;
+		cursor: pointer;
+	}
+
+	.form-submit:hover {
+		opacity: 0.8;
+	}
+
+	.footer {
+		width: 80%;
+		padding-top: 20px;
+		margin-bottom: 20px;
+		border-top: 2px solid #ccc;
+	}
+	
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="title">
+			Book
+		</div>
+		<div class="form"> 
+			<form id="form-id" th:object="${book}" th:action="@{save/{id}(id=${book.id})}"
+ 				th:method="${id} < 0 ? POST : PUT" method> 
+				<div class="form-1">
+
+					<div class="form-info"> 
+						<fieldset id="fieldset" style="border: none;" disabled>
+							<div class="form-info-1">
+								<div class="form-label">
+									<div class="label">
+										<label>Id:</label>
+									</div>
+									<input type="number" class="form-input" required name="id"
+										 th:value="${book.id}"><br /> 
+								</div> 
+								<div class="form-label">
+									<div class="label">
+										<label>Tiêu đề:</label>
+									</div>
+									<input type="text" class="form-input" required name="title"
+										th:value="${book.title}"><br />
+								</div>
+							</div>
+	
+							<div class="form-info-2 mt-12">
+								<div class="form-label">
+									<div class="label">
+										<label>Tác giả:</label>
+									</div>
+									<input type="text" class="form-input" required name="author"
+										th:value="${book.author}"><br />
+								</div>
+								<div class="form-label">
+									<div class="label">
+										<label>Giá:</label>
+									</div>
+									<input type="text" class="form-input" required name="price"
+										th:value="${book.price}"><br />
+								</div>
+							</div>
+	
+							<div class="form-info-3 mt-12">
+								<div class="form-label">
+									<div class="label">
+										<label>Mô tả:</label>
+									</div>
+									<textarea rows="5" cols="45" type="text" class="form-input" required name="describes"
+										th:text="${book.describes}"></textarea>
+								</div>
+							</div>
+	
+							<div class="form-info-4 mt-12">
+								<div class="form-label">
+									<div class="label">
+										<label>Ngày phát hành:</label>
+									</div>
+									<input type="date" class="form-input" required name="date"
+										th:value="${book.date}"><br />
+								</div>
+								<div class="form-label">
+									<div class="label">
+										<label>Số trang:</label>
+									</div>
+									<input type="number" class="form-input" required name="bookpage"
+										th:value="${book.bookpage}"><br />
+								</div>
+							</div>
+	
+							<div class="form-info-5 mt-12">
+								<div class="form-label">
+									<div class="label">
+										<label>Thể loại:</label>
+									</div>
+									<select style="background-color: #fff; width: 168px" name="category" class="form-input" required th:value="${book.category}">
+										<option value="Truyện">Truyện</option>
+										<option value="Sách tham khảo">Sách tham khảo</option>	
+										<option value="Sách tiểu thuyết">Sách tiểu thuyết</option>									
+										<option value="Sách phát triển">Sách phát triển</option>
+									</select>
+								</div>
+							</div>
+						</fieldset>
+						
+					</div>
+					
+				</div>
+
+				
+			</form>
+			<div class="form-image">
+				<form th:action="@{/uploadFile}" method="post"
+					enctype="multipart/form-data">
+						<input type="file" name="file" size="50" /> <br /> <input
+ 						type="submit" value="Upload File" /> 
+				</form>
+			</div>
+			
+ 		</div>
+		
+	</div>
+	<div class="footer">
+		<button type="submit" id="save" form="form-id" class="form-submit" value="Save Book">Save</button>	
+		<button style="background-color:#008cba;" type="button" id="edit" onclick="enableForm()" class="form-submit" value="Edit">Edit</button>
+	</div>
+
+	<script>
+		
+        	function enableForm() {
+ 				document.getElementById("fieldset").disabled = false;
+			}
+
+			$(document).ready(function(){
+  				$('#edit').on('click',function() {
+  					$(this).hide();
+  					$('#save').show();
+				});
+  			})
+        	
+	</script>
+</body>
+
+	
+
+</html>

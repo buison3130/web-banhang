@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+<body>
+    <div class="main">
+		<header class="header">
+			<nav class="header_navbar">
+				<ul class="header_navbar-list">
+					<li class="header_navbar-item">Ứng dụng</li>
+					<li class="header_navbar-item">
+						<span class="header_navbar-connect">Kết nối</span> 
+						<a href="" class="header_navbar-link"> <i class="fab fa-facebook header_navbar-icon"></i></a> 
+						<a href="" class="header_navbar-link"> <i class="fab fa-instagram header_navbar-icon"></i></a>
+					</li>
+				</ul>
+
+				<ul class="header_navbar-list">
+					<li class="header_navbar-item"><a href="" class="header_navbar-link"> <i class='fas fa-bell header_navbar-icon'></i> Thông báo</a></li>
+					<li class="header_navbar-item"><a href="" class="header_navbar-link"> <i class="fas fa-shopping-cart"></i> Giỏ hàng</a></li>
+					<li class="header_navbar-item"><a href="" class="header_navbar-link"> Đăng xuất </a></li>
+				</ul>
+			</nav>
+
+			<div class="header_search">
+				<input type="text" placeholder="Tìm kiếm"
+					class="header_search-input"> <i
+					class="fas fa-search header_search-icon"></i>
+			</div>
+		</header>
+
+        <div class="container">
+            <div class="book-view">
+                <div class="book-view-image">
+                </div>
+                <div th:object="${book}" class="book-view-detail">
+                    <div th:text="${book.title}" class="book-view-detail_title"></div>
+                    <div class="book-view-detail_item">
+                        <div th:text="${book.price}" class="book-view-detail_price"></div>
+                        <span style="color: var(--primary-color); font-size: 3rem;"> đ</span>
+                    </div>
+                    <div class="book-view-detail_item">
+                        <span  class="book-view-detail_name">Tác giả: </span>
+                        <div style="color: var(--text-color);" th:text="${book.author}" class="book-view-detail_author"></div>
+                    </div>
+                    <div class="book-view-detail_item">
+                        <span class="book-view-detail_name">Mô tả: </span>
+                        <div style="color: var(--text-color);" th:text="${book.describes}" class="book-view-detail_desc"></div>
+                    </div>
+                    <div class="book-view-detail_item">
+                        <span class="book-view-detail_name">Ngày xuất bản: </span>
+                        <div style="color: var(--text-color);" th:text="${book.date}" class="book-view-detail_date"></div>
+                    </div>
+                    <div class="book-view-detail_item">
+                        <span class="book-view-detail_name">Số trang: </span>
+                        <div style="color: var(--text-color);" th:text="${book.bookpage}" class="book-view-detail_page"></div>
+                    </div>
+                    <div class="book-view-detail_item">
+                        <span class="book-view-detail_name">Thể loại: </span>
+                        <div style="color: var(--text-color);" th:text="${book.category}" class="book-view-detail_category"></div>
+                    </div>
+
+                    <div class="book-view-detail_item" style="align-items: center; margin-top: 30px;">
+        				<span class="book-view-detail_name">Số lượng: </span>
+        				<div class="book-view-detail_quantity">
+            				<button class="book-view-detail_icon" onclick = "handleMinus()"><i class="fa fa-minus"></i></button>
+            				<input class="book-view-detail_number" id = "amount" value = "1"></input>
+            				<button class ="book-view-detail_icon" onclick = "handlePlus()"><i class="fa fa-plus"></i></button>
+        				</div>
+    				</div>
+
+                    <div class="book-view-detail_item">
+                        <button class="btn book-view-detail_btn">Thêm vào giỏ hàng</button>
+                        <button class="btn btn--primary btn-hover">Mua ngay</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="book-comment">
+                <div class="book-comment_title">ĐÁNH GIÁ SẢN PHẨM</div>
+                <textarea cols="160" rows="5" class="book-comment_input"></textarea>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let amountElement = document.getElementById('amount')
+        let amount = amountElement.value;
+        
+        function render (amount) {
+            amountElement.value = amount
+        }
+
+        function handlePlus () {
+            amount++;
+            render(amount)
+        }
+
+        function handleMinus () {
+            if(amount > 1)
+                amount--;
+            render(amount)
+        }
+        
+    </script>
+    
+</body>
+</html>

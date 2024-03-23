@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background-image: linear-gradient(to bottom right, #2e7ab6, #8547ac);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 340px;
+            width: 300px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        .form-header {
+            font-size: 22px;
+            width: 100%;
+            height: 25%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #form {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            height: 50%;
+            margin:20px 0 0;
+        }
+
+        .form-input {
+            width: 230px;
+            padding: 6px 8px;
+            font-size: 14px;
+            outline: none;
+            border: none;
+            border-bottom: 2px solid rgb(194, 194, 194);
+            border-radius: 2px;
+        }
+
+        .form-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 16px;
+            height: 25%;
+        }
+
+        .button-login {
+            font-size: 16px;
+            text-decoration: none;
+            padding: 8px 16px;
+            width: 246px;
+            border: none;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            background-color: #2691d9;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .button-login:hover {
+            background-color: #0687dd;
+        }
+
+        .button-register {
+            text-decoration: none;
+            color: #2691d9;
+            cursor: pointer;
+        }
+        
+        .button-register:hover {
+        	text-decoration: underline;
+        }
+
+        .form-footer p {
+            margin: 0 0 8px;
+        }
+        
+        .form-err {
+        	margin-bottom: 4px;
+        	margin-right: 20px;
+        	font-size: 14px;
+        	color: red;
+        }
+        
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="form-header">
+            <h2>Login</h2>
+        </div>
+
+        <form id="form" action="/checklogin" method="post">
+                <input type="text" placeholder="Usename" name="user" required class="form-input">
+                <input type="password" placeholder="Password" name="password" required class="form-input">
+                <div class="form-err" th:text = "${err}"></div>
+        </form>
+
+        <div class="form-footer">
+            <button form="form" class="button-login">Login</button>
+            <p>Not a member? <a th:href="@{/register}" class="button-register">Signup</a></p>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<link rel="stylesheet" th:href="@{/style.css}">
+<style>
+	
+</style>
+
+<title>Home</title>
+</head>
+<body>
+	<div class="main">
+		<header class="header">
+			<nav class="header_navbar">
+				<ul class="header_navbar-list">
+					<li class="header_navbar-item">Ứng dụng</li>
+					<li class="header_navbar-item">
+						<span class="header_navbar-connect">Kết nối</span> 
+						<a href="" class="header_navbar-link"> <i class="fab fa-facebook header_navbar-icon"></i></a> 
+						<a href="" class="header_navbar-link"> <i class="fab fa-instagram header_navbar-icon"></i></a>
+					</li>
+				</ul>
+
+				<ul class="header_navbar-list">
+					<li class="header_navbar-item"><a href="" class="header_navbar-link"> <i class='fas fa-bell header_navbar-icon'></i> Thông báo</a></li>
+					<li class="header_navbar-item"><a href="" class="header_navbar-link"> <i class="fas fa-shopping-cart"></i> Giỏ hàng</a></li>
+					<li class="header_navbar-item"><a href="/login" class="header_navbar-link"> Đăng xuất </a></li>
+				</ul>
+			</nav>
+
+			<div class="header_search">
+				<input type="text" placeholder="Tìm kiếm"
+					class="header_search-input"> <i
+					class="fas fa-search header_search-icon"></i>
+			</div>
+		</header>
+		
+		<div class="app__container">
+            <div class="grid">
+                <div class="grid__row app__content">
+                    
+    
+                    <div  class="grid__column">
+                        <div class="home-product">
+                            <div class="grid__row">
+                                <div th:each="book: ${books}" class="grid__column-2-4">
+                                    <a th:href="@{book-view/{id}(id = ${book.id})}" class="home-product-item">
+                                        <div class="home-product-item__img" style = "background-image: url('https://cf.shopee.vn/file/3bee0c26a557293fa68b906bf85ec9c0');"></div>
+                                        <div class="home-product-item__body">
+                                            <div th:text="${book.title}" class="home-product-item__name"></div>
+                                            <div th:text="${book.price}" class="home-product-item__price"></div>
+                                            <div th:text="${book.author}" class="home-product-item__author"></div>
+                                            
+
+                                        </div>       
+                                    </a>
+                                </div>
+                                
+                            </div>
+
+                            
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+	</div>
+
+</body>
+</html>
